@@ -1,3 +1,5 @@
+using System.Data.Common;
+
 public static class ArraysTester {
     /// <summary>
     /// Entry point for the tests
@@ -39,7 +41,25 @@ public static class ArraysTester {
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
 
-        return new double[0]; // replace this return statement with your own
+        // Process
+        // 1- Create a double array of "length" memory, where the multiples will be stored and returned, and an index to use when adding.
+        // 2- Create a for loop where the number is multiplied by the number of multiples starting in 1 and incrementing
+        //    by 1 until the number of multiples is reached. Add the results to the array created before.
+        // 3- Return array
+        
+        // Array and index
+        var result = new double[length];
+        int index = 0;
+
+        // For loop
+        for(int i = 1; i <= length; i++)
+        {
+            double multiple = i * number;
+            result[index] = multiple;
+            index++;
+        }
+
+        return result; 
     }
     
     /// <summary>
@@ -56,6 +76,24 @@ public static class ArraysTester {
         // Remember: Using comments in your program, write down your process for solving this problem
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
+
+        // Process
+        // 1- Create a List<int> and store the range (using GetRange) of numbers of the original list
+        //    that will later be inserted at the beginning of the rotated list. The parameters will be the count of
+        //    the original List minus the amount of numbers where the list will be rotated. The values to get will be the amount variable.
+        // 2- Remove the numbers already stored in the sliced List from the original List. Use RemoveRange. The parameters are the same as
+        //    in the previous GetRange
+        // 3- Insert the sliced List of Step 1 at the beginning of the original List.
+
+
+        // Create a list and store the range to insert later at the beginning of the data
+        List<int> slice = data.GetRange(data.Count - amount, amount);
+
+        // Remove sliced values
+        data.RemoveRange(data.Count - amount, amount);
+
+        // Insert sliced range
+        data.InsertRange(0, slice);
 
     }
 }
