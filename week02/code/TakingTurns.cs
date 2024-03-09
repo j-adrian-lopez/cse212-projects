@@ -15,7 +15,8 @@
         // Console.WriteLine(players);    // This can be un-commented out for debug help
         while (players.Length > 0)
             players.GetNextPerson();
-        // Defect(s) Found: 
+        // Defect(s) Found: The Enqueue method in the PersonQueue class was inserting the new Person
+        //                  at the beginning instead of adding them at the end of the queue.
 
         Console.WriteLine("---------");
 
@@ -38,7 +39,7 @@
         while (players.Length > 0)
             players.GetNextPerson();
 
-        // Defect(s) Found: 
+        // Defect(s) Found: after the defect is corrected in test 1, none.
 
         Console.WriteLine("---------");
 
@@ -56,7 +57,7 @@
             players.GetNextPerson();
             // Console.WriteLine(players);
         }
-        // Defect(s) Found: 
+        // Defect(s) Found: The person with infinite rounds was being removed from the queue after one round.
 
         Console.WriteLine("---------");
 
@@ -73,7 +74,7 @@
             players.GetNextPerson();
             // Console.WriteLine(players);
         }
-        // Defect(s) Found: 
+        // Defect(s) Found: after the defect is corrected in test 3, none.
 
         Console.WriteLine("---------");
 
@@ -83,6 +84,6 @@
         Console.WriteLine("Test 5");
         players = new TakingTurnsQueue();
         players.GetNextPerson();
-        // Defect(s) Found:
+        // Defect(s) Found: none
     }
 }

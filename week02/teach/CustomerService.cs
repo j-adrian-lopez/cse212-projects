@@ -11,20 +11,30 @@ public class CustomerService {
         // Test Cases
 
         // Test 1
-        // Scenario: 
-        // Expected Result: 
+        // Scenario: Add two customers and serve them. Test empty queue.
+        // Expected Result: After creating two customers, display customers and an empty queue notification at the end
         Console.WriteLine("Test 1");
+        var cs = new CustomerService(2);
+        cs.AddNewCustomer();
+        cs.AddNewCustomer();
+        cs.ServeCustomer();
+        cs.ServeCustomer();
+        cs.ServeCustomer();
 
-        // Defect(s) Found: 
+
+        // Defect(s) Found: none
 
         Console.WriteLine("=================");
 
         // Test 2
-        // Scenario: 
-        // Expected Result: 
+        // Scenario: Test if there  is a limit to the queue
+        // Expected Result: get max queue notification
         Console.WriteLine("Test 2");
+        var test2 = new CustomerService(1);
+        test2.AddNewCustomer();
+        test2.AddNewCustomer();
 
-        // Defect(s) Found: 
+        // Defect(s) Found: max size should be -1 to correspond to the input number (queue index counts from 0)
 
         Console.WriteLine("=================");
 
@@ -36,9 +46,9 @@ public class CustomerService {
 
     public CustomerService(int maxSize) {
         if (maxSize <= 0)
-            _maxSize = 10;
+            _maxSize = 9;
         else
-            _maxSize = maxSize;
+            _maxSize = maxSize - 1;
     }
 
     /// <summary>
@@ -88,8 +98,13 @@ public class CustomerService {
     /// Dequeue the next customer and display the information.
     /// </summary>
     private void ServeCustomer() {
-        _queue.RemoveAt(0);
+        if (_queue.Count <= 0) {
+            Console.WriteLine("Empty queue.");
+            return;
+        }
+        
         var customer = _queue[0];
+        _queue.RemoveAt(0);
         Console.WriteLine(customer);
     }
 

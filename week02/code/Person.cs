@@ -4,7 +4,12 @@ public class Person {
 
     internal Person(string name, int turns) {
         Name = name;
-        Turns = turns;
+        if (turns >= 1) {
+            Turns = turns;
+        }
+        else {
+            Turns = -1;
+        }
     }
 
     public override string ToString() {
