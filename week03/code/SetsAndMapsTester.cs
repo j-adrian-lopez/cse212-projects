@@ -111,6 +111,19 @@ public static class SetsAndMapsTester {
         // To display the pair correctly use something like:
         // Console.WriteLine($"{word} & {pair}");
         // Each pair of words should displayed on its own line.
+        var set1 = new HashSet<string>();
+        foreach(string word in words) {
+            char[] wordToArray = word.ToCharArray();
+            Array.Reverse(wordToArray);
+            string reversedWord = new string(wordToArray);
+
+            if(set1.Contains(reversedWord)) {
+                Console.WriteLine($"{word} & {reversedWord}");
+            }
+            else {
+                set1.Add(word);
+            }
+        }
     }
 
     /// <summary>
@@ -131,7 +144,13 @@ public static class SetsAndMapsTester {
         var degrees = new Dictionary<string, int>();
         foreach (var line in File.ReadLines(filename)) {
             var fields = line.Split(",");
-            // Todo Problem 2 - ADD YOUR CODE HERE
+            var degree = fields[3];
+            if(degrees.ContainsKey(degree)) {
+            degrees[degree] += 1;
+        }
+        else {
+            degrees[degree] = 1;       
+        }
         }
 
         return degrees;
@@ -157,7 +176,22 @@ public static class SetsAndMapsTester {
     /// # Problem 3 #
     /// #############
     private static bool IsAnagram(string word1, string word2) {
-        // Todo Problem 3 - ADD YOUR CODE HERE
+        var words = new Dictionary<string, string>();
+        
+        // sort word1 and assign to dictionary
+        char[] word1ToArray = word1.ToLower().ToCharArray();
+        Array.Sort(word1ToArray);
+        string sortedWord = new string(word1ToArray).Trim();
+        words[word1] = sortedWord;
+
+        // sort word2 and check
+        char[] word2ToArray = word2.ToLower().ToCharArray();
+        Array.Sort(word2ToArray);
+        string sortedWord2 = new string(word2ToArray).Trim();
+        
+        if(sortedWord2 == words[word1]) {
+            return true;
+        }
         return false;
     }
 
