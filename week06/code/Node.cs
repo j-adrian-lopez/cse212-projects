@@ -1,3 +1,5 @@
+using System.Security.Cryptography.X509Certificates;
+
 public class Node {
     public int Data { get; set; }
     public Node? Right { get; private set; }
@@ -8,6 +10,10 @@ public class Node {
     }
 
     public void Insert(int value) {
+        // Insert only if the value doesn't exist in the tree
+        if (value == Data) {
+            return;
+        }
         if (value < Data) {
             // Insert to the left
             if (Left is null)
@@ -25,12 +31,37 @@ public class Node {
     }
 
     public bool Contains(int value) {
-        // TODO Start Problem 2
-        return false;
+        if (value == Data) {
+            return true;
+        } else if (value < Data) {
+            if (Left is null){
+                return false;
+                }
+            else {
+                return Left.Contains(value);
+            }
+        } else if (value > Data) {
+            if (Right is null) {
+                return false;
+            }
+            else {
+                return Right.Contains(value);
+            }
+        } else {
+            return false;
+        }
     }
 
     public int GetHeight() {
-        // TODO Start Problem 4
-        return 0; // Replace this line with the correct return statement(s)
+        int GetHeight(Node node) {
+            if (node is null) {
+                return 0;
+            } else {
+                int left = GetHeight(node.Left);
+                int right = GetHeight(node.Right);
+                return 1 + Math.Max(left, right);
+            }
+        } 
+        return GetHeight(this);
     }
 }
